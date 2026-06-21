@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澳门新葡京 · 主题知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f6f3ef;
+            color: #1e1e1a;
+            line-height: 1.6;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(135deg, #0e1419 0%, #1a242c 100%);
+            padding: 4rem 2rem 3.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -20%;
+            width: 140%;
+            height: 120px;
+            background: #f6f3ef;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: #e8ddd0;
+            margin-bottom: 0.6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #b8aa98;
+            max-width: 600px;
+            margin: 0.6rem auto 0;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: -30px auto 0;
+            padding: 0 1.8rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 说明区 — 知识库引导 */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 2.8rem 0 1.2rem;
+            font-size: 1.0rem;
+            color: #7b6e5e;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .section-label::before {
+            content: '▍';
+            font-size: 1.6rem;
+            color: #986b47;
+            line-height: 1;
+        }
+
+        .intro-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.4rem 2.2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            margin-bottom: 2rem;
+        }
+
+        .intro-card p {
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            color: #2e2b26;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-link {
+            color: #986b47;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .highlight-link:hover {
+            border-bottom-color: #986b47;
+            color: #6f4f33;
+        }
+
+        /* 目录感布局 —— 两栏卡片网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.6rem;
+            margin: 2.2rem 0 1.8rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.8rem 1.6rem 1.6rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.15s ease, box-shadow 0.2s;
+            border-left: 4px solid #dac3ae;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2b241e;
+            margin-bottom: 0.6rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #4a423b;
+            line-height: 1.65;
+        }
+
+        /* 提示区 */
+        .tip-area {
+            background: #eae3da;
+            border-radius: 24px;
+            padding: 1.8rem 2.2rem;
+            margin: 2.4rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+        }
+
+        .tip-area .tip-text {
+            flex: 2 1 280px;
+            font-size: 0.98rem;
+            color: #3d352d;
+        }
+
+        .tip-area .tip-text strong {
+            color: #6f4f33;
+        }
+
+        .tip-area .tip-link {
+            flex: 0 0 auto;
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 0.5rem 1.6rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #3d352d;
+            text-decoration: none;
+            border: 1px solid #cbb7a4;
+            transition: background 0.2s, border-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .tip-area .tip-link:hover {
+            background: #dac3ae;
+            border-color: #986b47;
+        }
+
+        /* FAQ 摘要区 */
+        .faq-summary {
+            margin: 2.6rem 0 1.8rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #d9cfc3;
+            padding: 1.2rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #362d25;
+            margin-bottom: 0.25rem;
+            font-size: 1.02rem;
+        }
+
+        .faq-a {
+            color: #5a5047;
+            font-size: 0.93rem;
+            margin-top: 0.2rem;
+        }
+
+        .faq-a a {
+            color: #986b47;
+            text-decoration: none;
+            border-bottom: 1px dotted #b99f89;
+        }
+
+        .faq-a a:hover {
+            border-bottom-style: solid;
+            color: #6f4f33;
+        }
+
+        /* 相关信息区 */
+        .related-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            margin: 2.2rem 0 1.2rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 2.2rem;
+        }
+
+        .related-col {
+            flex: 1 1 200px;
+        }
+
+        .related-col h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4a3f35;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        .related-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .related-col li {
+            margin-bottom: 0.4rem;
+            font-size: 0.93rem;
+            color: #5f554a;
+        }
+
+        .related-col li::before {
+            content: '· ';
+            color: #986b47;
+            font-weight: bold;
+        }
+
+        /* 页脚微信息 */
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #978d81;
+            border-top: 1px solid #d9cfc3;
+            padding-top: 2rem;
+        }
+
+        a {
+            color: #986b47;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .sub {
+                font-size: 0.95rem;
+            }
+            .container {
+                padding: 0 1.2rem 3rem;
+            }
+            .intro-card {
+                padding: 1.6rem 1.4rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .tip-area {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tip-area .tip-link {
+                text-align: center;
+                white-space: normal;
+            }
+            .related-box {
+                flex-direction: column;
+                gap: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <section class="hero">
+        <h1>澳门新葡京 · 主题档案</h1>
+        <p class="sub">一座城，一种叙事 · 从地标到文化符号的知识索引</p>
+    </section>
+
+    <div class="container">
+
+        <!-- 说明区：知识库入口式导语 -->
+        <div class="intro-card">
+            <p>
+                提起澳门，许多人脑海中会浮现出那座金色莲花般的建筑——<a href="https://www-grandlisboa.com" class="highlight-link">澳门新葡京</a>。它不仅是一处城市地标，更是一个交织着设计、历史、娱乐与生活方式的综合切片。这个页面作为知识库的浅层入口，帮你在零散信息中找到一个稳定的锚点。
+            </p>
+            <p>
+                我们尝试从建筑语言、在地文化、休闲场景等几个侧面，梳理围绕新葡京的公共话题与日常观察。无论你是在规划行程，还是单纯对澳门都市纹理感兴趣，下面这些内容或许能给你一点参考。
+            </p>
+        </div>
+
+        <!-- 目录感：特点 / 场景卡片 -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>建筑与标识</h3>
+                <p>以莲花为灵感的主塔，外立面金色网格在夜间尤其醒目。与南湾湖对岸的天际线形成对话，是许多摄影爱好者取景的固定坐标。</p>
+            </div>
+            <div class="feature-card">
+                <h3>在地生活圈</h3>
+                <p>附近街巷里藏着不少本地食肆与老铺，从早茶到深夜糖水，步行可及的烟火气与大型度假村的精致感形成有趣对比。</p>
+            </div>
+            <div class="feature-card">
+                <h3>公共空间与展览</h3>
+                <p>酒店大堂及公共区域不定期陈列艺术装置与藏品，部分向非住客开放。适合在散步途中短暂停留，感受空间的尺度与细节。</p>
+            </div>
+            <div class="feature-card">
+                <h3>交通与区位</h3>
+                <p>位于葡京区核心，周边公交站、的士站与轻轨站点分布合理。无论是前往历史城区还是离岛，这里都是一个便利的中转节点。</p>
+            </div>
+        </div>
+
+        <!-- 提示区 -->
+        <div class="tip-area">
+            <div class="tip-text">
+                <strong>📌 实用提示</strong> · 如果你计划实地走访，建议将新葡京安排在下午或傍晚时段，先参观周边街巷，再于入夜后欣赏建筑灯光。拍照时请注意公共区域的规定。
+            </div>
+            <a href="https://www-grandlisboa.com" class="tip-link">澳门新葡京</a>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-summary">
+            <div class="faq-item">
+                <div class="faq-q">新葡京的开放范围？</div>
+                <div class="faq-a">酒店、部分餐饮及公共区域对公众开放。进入特定场所有年龄及着装要求，建议出发前了解最新说明。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">周边有什么值得顺路一去的地方？</div>
+                <div class="faq-a">步行范围内有议事亭前地、大三巴牌坊、福隆新街等历史景点，也有不少葡式蛋挞店与手信铺子。<a href="https://www-grandlisboa.com">澳门新葡京</a>本身也常被当作步行路线的起点或终点。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">有适合非住客的休闲设施吗？</div>
+                <div class="faq-a">部分餐厅、酒吧及购物走廊对外营业。具体营业时间与预约方式请以现场公示为准。</div>
+            </div>
+        </div>
+
+        <!-- 相关信息区 -->
+        <div class="related-box">
+            <div class="related-col">
+                <h4>相似坐标</h4>
+                <ul>
+                    <li>澳门旅游塔</li>
+                    <li>永利澳门</li>
+                    <li>美高梅</li>
+                    <li>渔人码头</li>
+                </ul>
+            </div>
+            <div class="related-col">
+                <h4>常见主题词</h4>
+                <ul>
+                    <li>澳门城市天际线</li>
+                    <li>南湾湖夜景</li>
+                    <li>葡式建筑风格</li>
+                    <li>中西文化交汇</li>
+                </ul>
+            </div>
+            <div class="related-col">
+                <h4>延伸阅读方向</h4>
+                <ul>
+                    <li>澳门填海史与都市扩张</li>
+                    <li>赌权开放后的建筑竞赛</li>
+                    <li>本地居民视角的旅游区</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer-note">
+            内容仅供知识分享 · 基于公开信息整理 · 建议出行前核实最新情况
+        </div>
+
+    </div>
+</body>
+</html>
